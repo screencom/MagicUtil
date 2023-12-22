@@ -23,13 +23,13 @@ enum LogAction {
 /// Handles all file related commands that requires opening files
 /// Handles all file related commands that requires tailing and following files.
 pub fn handle_open_command(submatches: &ArgMatches) {
-    let file: &str = submatches.value_of("FILE").unwrap();
+    let file: &String = submatches.get_one("FILE").unwrap();
     handle_command(file, LogAction::Open);
 }
 
 /// Handles all file related commands that requires tailing and following files.
 pub fn handle_tail_command(submatches: &ArgMatches) {
-    let file: &str = submatches.value_of("FILE").unwrap();
+    let file: &String = submatches.get_one("FILE").unwrap();
     handle_command(file, LogAction::Tail);
 }
 
@@ -84,7 +84,7 @@ fn resolve_file_in_mi_logdir(file: &str) -> Option<String> {
 fn resolve_file_in_mi_confdir(file: &str) -> Option<String> {
     let mut conf_path = get_mi_home_dir();
 
-    let mut file_copy = file.clone();
+    let mut file_copy = file;
     if file_copy == "conf" {
         file_copy = "config.properties";
     }
