@@ -5,6 +5,7 @@
 VERSION := $(shell awk '/version/{gsub(/"/, "", $$3); print $$3; exit}' ./Cargo.toml)
 
 windows:
+	rustup update
 	cross build --target x86_64-pc-windows-gnu --release
 
 release:
